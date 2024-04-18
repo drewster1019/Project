@@ -1,3 +1,8 @@
+// Team-21
+// Andrew Patrascoiu
+// Elianis Roman
+// Keyana Brown
+
 #include "spimcore.h"
 
 
@@ -44,22 +49,21 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
 /* 10 Points */
 int instruction_fetch(unsigned PC, unsigned *Mem, unsigned *instruction)
 {
-    // Check if PC is within the bounds of the word-addressable memory size.
+    // Check if PC is within the bounds
     if ((PC >> 2) >= MEMSIZE) {
-        // PC is out of bounds, return 1 to indicate a halt condition.
+        // PC is out of bounds
         return 1;
     }
 
-    // Check if PC is word-aligned.
+    // Check if PC is word-aligned
     if (PC % 4 != 0) {
-        // PC is not word-aligned, return 1 to indicate a halt condition.
+        // PC is not word-aligned
         return 1;
     }
 
-    // Fetch the instruction from memory at the word offset given by PC >> 2.
+    // Fetch the instruction from memory
     *instruction = Mem[PC >> 2];
 
-    // No halt condition occurred.
     return 0;
 }
 
