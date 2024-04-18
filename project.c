@@ -5,7 +5,39 @@
 /* 10 Points */
 void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
 {
+    switch(ALUControl)
+    {
+        case 0: // Z = A + B
+            *ALUresult = A + B;
+            break;
+        case 1: // Z = A - B
+            *ALUresult = A - B;
+            break;
+        case 2: // if A < B, Z = 1; otherwise, Z = 0 (A and B are unsigned integers)
+            *ALUresult = A < B ? 1 : 0;
+            break;
+        case 3: 
+            *ALUresult = A < B ? 1 : 0;
+            break;
+        case 4: // Z = A AND B
+            *ALUresult = A & B;
+            break;
+        case 5: // Z = A OR B
+            *ALUresult = A | B;
+            break;
+        case 6: // Z = Shift B left by 16 bits
+            *ALUresult = B << 16;
+            break;
+        case 7: // Z = NOT A
+            *ALUresult = ~A;
+            break;
+        default:
+            printf("Invalid ALU Control Code\n");
+            exit(1); // Exit the program if ALUControl is out of range
+    }
 
+    // Set Zero to 1 if the result is 0; otherwise, set to 0.
+    *Zero = (*ALUresult == 0) ? 1 : 0;
 }
 
 /* instruction fetch */
