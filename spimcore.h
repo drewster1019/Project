@@ -4,6 +4,7 @@
 
 #ifndef SPIMCORE
 
+#define MEMSIZE (65536 >> 2)
 #define MEM(addr) (Mem[addr >> 2])
 
 typedef struct

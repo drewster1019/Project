@@ -16,7 +16,7 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
         case 2: // if A < B, Z = 1; otherwise, Z = 0 (A and B are unsigned integers)
             *ALUresult = A < B ? 1 : 0;
             break;
-        case 3: 
+        case 3: // The table shows the same operation not sure if typo?
             *ALUresult = A < B ? 1 : 0;
             break;
         case 4: // Z = A AND B
@@ -42,11 +42,26 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
 
 /* instruction fetch */
 /* 10 Points */
-int instruction_fetch(unsigned PC,unsigned *Mem,unsigned *instruction)
+int instruction_fetch(unsigned PC, unsigned *Mem, unsigned *instruction)
 {
+    // Check if PC is within the bounds of the word-addressable memory size.
+    if ((PC >> 2) >= MEMSIZE) {
+        // PC is out of bounds, return 1 to indicate a halt condition.
+        return 1;
+    }
 
+    // Check if PC is word-aligned.
+    if (PC % 4 != 0) {
+        // PC is not word-aligned, return 1 to indicate a halt condition.
+        return 1;
+    }
+
+    // Fetch the instruction from memory at the word offset given by PC >> 2.
+    *instruction = Mem[PC >> 2];
+
+    // No halt condition occurred.
+    return 0;
 }
-
 
 /* instruction partition */
 /* 10 Points */
