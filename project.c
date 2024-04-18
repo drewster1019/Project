@@ -16,7 +16,7 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
         case 2: // if A < B, Z = 1; otherwise, Z = 0 (A and B are unsigned integers)
             *ALUresult = A < B ? 1 : 0;
             break;
-        case 3: 
+        case 3: // The table shows the same operation not sure if typo?
             *ALUresult = A < B ? 1 : 0;
             break;
         case 4: // Z = A AND B
